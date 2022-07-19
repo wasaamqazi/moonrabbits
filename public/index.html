@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <title>Moon Rabbits</title>
+  <meta content="" name="description" />
+  <meta content="" name="keywords" />
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.ico" rel="icon" />
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+  
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" />
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" type="text/css" href="assets/css/slick/slick.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/slick/slick-theme.css" />
+
+  <!-- Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet" />
+
+  <!-- <script src="assets/js/slick.min.js"></script> -->
+
+  <!-- <script src="assets/js/jquery-3.6.0.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+  <!-- Vendor JS Files -->
+
+  <!-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center" id="scrolltop"><i
+      class="bi bi-arrow-up-short"></i></a> -->
+
+  <!-- Vendor JS Files -->
+
+  <script src="assets/vendor/purecounter/purecounter.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <!-- Template Main JS File -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+
+  <!-- <script>
+    $(document).ready(function () {
+      var videoId = $("#vid-sec").get(0);
+      var playButton = $("#play-button");
+
+      playButton.on("click", function () {
+        playpause(videoId);
+      });
+
+      $("#play-button").click(function () {
+        $("#vid-sec").get(0).play();
+        // $("#play-button").css("display", "block");
+      });
+
+    });
+
+    function playpause(video) {
+      if (video.paused || video.ended) {
+        video.play();
+        $("#play-button").css("display", "none");
+      } else {
+        video.pause();
+        $("#play-button").css("display", "block");
+      }
+    }
+  </script> -->
+
+  <script>
+
+
+    $(document).ready(function () {
+
+      $("#hero").click(function () {
+        $("#slider-desk").prop('muted', false);
+      });
+
+      $(".icon-hide*").hide();
+      // $(window).scroll(function () {
+
+      //   if (window.scrollY > 100) {
+      //     $("#scrolltop").show();
+      //     $("#header").addClass("header-scrolled");
+      //     $("#slider-desk").get(0).pause();
+      //     $("#slider-mobile").get(0).pause();
+      //   } else {
+      //     $("#scrolltop").attr("style", "display: none !important");
+      //     $("#header").removeClass("header-scrolled");
+      //     $("#slider-desk").get(0).play();
+      //     $("#slider-mobile").get(0).play();
+      //   }
+      // });
+      $(".faq-collapsed").click(function () {
+        var faqId = $(this).attr("data-faq-id");
+        //   alert(faqId);
+        //   $("#" + faqId).toggleClass("collapse");
+        $("#" + faqId).slideToggle("slow");
+        $(".icon-show-" + faqId).toggle();
+        $(".icon-close-" + faqId).toggle();
+        // $(".faq-div").css("background-size","1288px 500px");
+
+      });
+      // $(".mobile-nav").hide();
+      // $(".mobile-nav-toggle").click(function () {
+      //   $(".mobile-nav").toggle();
+      //   $(".logo").toggle();
+      // });
+
+      $(window).on("load", function () {
+        // makes sure the whole site is loaded
+        $("#status").fadeOut(); // will first fade out the loading animation
+        $("#preloader").delay(350).fadeOut("slow"); // will fade out the white DIV that covers the website.
+        $("body").delay(350).css({ overflow: "visible" });
+      });
+
+      // var animation = bodymovin.loadAnimation({
+      //   // animationData: { /* ... */ },
+      //   container: document.getElementById('dog'), // required
+      //   path: 'assets/animals/Dog.json', // required
+      //   renderer: 'svg', // required
+      //   loop: true, // optional
+      //   autoplay: true, // optional
+      //   name: "Demo Animation", // optional
+      // });
+
+      // var animation2 = bodymovin.loadAnimation({
+      //   // animationData: { /* ... */ },
+      //   container: document.getElementById('bear'), // required
+      //   path: 'assets/animals/Bear.json', // required
+      //   renderer: 'svg', // required
+      //   loop: true, // optional
+      //   autoplay: true, // optional
+      //   // name: "Demo Animation", // optional
+      // });
+
+      // var animation3 = bodymovin.loadAnimation({
+      //   container: document.getElementById('elephant'), // required
+      //   path: 'assets/animals/Elephant.json', // required
+      //   renderer: 'svg', // required
+      //   loop: true, // optional
+      //   autoplay: true, // optional
+      //   // name: "Demo Animation", // optional
+      // });
+
+      // var animation4 = bodymovin.loadAnimation({
+      //   container: document.getElementById('owl'), // required
+      //   path: 'assets/animals/Owl.json', // required
+      //   renderer: 'svg', // required
+      //   loop: true, // optional
+      //   autoplay: true, // optional
+      // });
+
+      // var animation5 = bodymovin.loadAnimation({
+      //   container: document.getElementById('deer'), // required
+      //   path: 'assets/animals/Deer.json', // required
+      //   renderer: 'svg', // required
+      //   loop: true, // optional
+      //   autoplay: true, // optional
+      // });
+
+      // $(".videos-slider-2").slick({
+      //   autoplay: false,
+      //   slidesToScroll: 1,
+      //   slidesToShow: 1,
+      //   initialSlide: 1,
+      //   arrows: true,
+      //   dots: true,
+      //   prevArrow:
+      //     "<button type='button' class='slick-prev pull-left'><i class='fa fa-angle-left' aria-hidden='true'></i></button>",
+      //   nextArrow:
+      //     "<button type='button' class='slick-next pull-right'><i class='fa fa-angle-right' aria-hidden='true'></i></button>",
+      //   asNavFor: ".slider-nav-thumbnails",
+      // });
+
+      // $(".slider-nav-thumbnails").slick({
+      //   autoplay: false,
+      //   centerMode: true,
+      //   outerEdgeLimit: false,
+      //   slidesToShow: 2,
+
+      //   initialSlide: 1,
+      //   asNavFor: ".videos-slider-2",
+      //   dots: true,
+      //   focusOnSelect: true,
+      //   variableWidth: true,
+      //   infinite: true,
+      //   breakpoint: 600,
+      //   settings: {
+      //     slidesToShow: 5,
+      //     slidesToScroll: 5,
+      //   },
+      // });
+
+      // // Remove active class from all thumbnail slides
+      // $(".slider-nav-thumbnails .slick-slide").removeClass("slick-active");
+
+      // // Set active class to first thumbnail slides
+      // $(".slider-nav-thumbnails .slick-slide").eq(0).addClass("slick-active");
+
+      // On before slide change match active thumbnail to current slide
+      // $(".videos-slider-2").on(
+      //   "beforeChange",
+      //   function (event, slick, currentSlide, nextSlide) {
+      //     var mySlideNumber = nextSlide;
+      //     $(".slider-nav-thumbnails .slick-slide").removeClass(
+      //       "slick-active"
+      //     );
+      //     $(".slider-nav-thumbnails .slick-slide")
+      //       .eq(mySlideNumber)
+      //       .addClass("slick-active");
+      //   }
+      // );
+    });
+  </script>
+</body>
+
+</html>
