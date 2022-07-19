@@ -443,7 +443,7 @@ h2.congrats {
   left: 0px;
   mix-blend-mode: screen;
   transform: rotate(247deg);
-  width: 813px;
+  width:750px;
   z-index: 1;
 }
 .logo-img{
@@ -459,18 +459,20 @@ h2.congrats {
     
    
  
-    width: 320px;
+    width: 290px;
     
 }  
 }
 
 img.smoke {
   /* position: absolute; */
-  margin-left: -469px;
+  /* margin-left: -469px; */
   mix-blend-mode: screen;
   transform: rotate(35.37deg);
   width: 160px;
-  margin-top: 270px;
+  /* margin-top: 270px; */
+  margin-left: -78px;
+  margin-top: -48px;
 }
 
 .smokeandchar{
@@ -484,13 +486,6 @@ img.smoke {
   background-repeat: no-repeat;
 } */
 
-@media (min-width:1399px) {
-  img.smoke {
-  
-    margin-left: -527px;
-   
-}  
-}
 
 .footer {
   padding: 60px 0px;
@@ -501,3 +496,223 @@ img.smoke {
   height: 5px;
   background: linear-gradient(90deg, rgba(15, 169, 255, 0) 0%, #605DFE 51.75%, rgba(15, 169, 255, 0) 100%);
 }
+
+@media (max-width:768px) {
+  .moonrabit {
+   
+    margin: 0 auto;
+    display: block;
+}
+.footer {
+  padding: 60px 0px;
+  padding-bottom: 0;
+}
+
+
+}
+
+.hamburger{
+  display: none;
+}
+
+@media (max-width:992px) {
+  .navigation-wrap {
+    display: none;
+  }
+  .navigation-wrap {
+    background: linear-gradient(181deg, #c542b5, #c20758);
+    z-index: 999;
+    position: relative;
+    position: absolute;
+    /* width: 94%; */
+    top: 84px;
+    left: 0;
+    right: 0px;
+    align-items: flex-start;
+    height: 230px;
+    padding-top: 30px;
+    justify-content: center;
+}
+ul.navigationul {
+  flex-direction: column;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.hamburger{
+  display: block;
+  position: relative;
+  z-index: 999;
+}
+.hamburger-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+
+.hero-section {
+ 
+  padding-top: 10px;
+}
+.hamburger {
+  display: block;
+  position: relative;
+  z-index: 999;
+  width: 41px;
+  padding-top: 7px;
+  /* filter: brightness(0) invert(1); */
+  margin-top: 33px;
+  background: #e44bc9;
+  padding: 10px;
+}
+.logo-img {
+ 
+  width: 130px;
+}
+.popup-wrap {
+ 
+  margin: 0px 10px;
+  padding: 40px 0px;
+}
+.modal-content {
+ 
+  background-color: transparent !important;
+ 
+}
+button.stake-btn {
+ 
+  font-size: 14px;
+ 
+}
+img.img-fluid.character {
+
+  display: none;
+}
+.smokeandchartoger {
+  display: flex;
+  align-items: center;
+}
+
+}
+
+@media (max-width:576px) {
+  .for-clouds {
+   
+    background-size: 90px,110px,90px;
+   height: auto;
+}
+img.img-fluid.character {
+  position: relative;
+  z-index: 2;
+}
+
+
+.thecharacter {
+  display: flex;
+  height: 100%;
+  align-items: end;
+  min-height: 410px;
+}
+
+  
+}
+
+
+.mystyle{
+  display: block ;
+  }
+
+
+.banner-txt h3{
+  font-family: Pixellari;
+  margin: 0;
+}
+.banner-txt {
+  background: url(../img/moon/box.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-top: 11px;
+  padding-left: 36px;
+  padding-bottom: 40px;
+  padding-right: 9px;
+  padding: 80px;
+  padding-top: 29px;
+  margin-left: -110px;
+  margin-top: -290px;
+  position: relative;
+}
+h3.whymoonrabbits {
+  color: #35C7E7;
+  font-size: 23px;
+}
+h3.wearesexy {
+  color: #FF51D9;
+  font-size: 59px;
+}
+h3.wewillgive {
+  color: white;
+  font-size: 23px;
+}
+.smokeandchar-for-mob {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width:1200px) {
+  img.char-mob {
+    width: 80%;
+}
+}
+
+@media (max-width:992px) {
+  .char-mob {
+    width: 501px;
+}
+.char-box {
+  width: 204px;
+}
+.smokeandchar-for-mob {
+  display: flex;
+  align-items: center;
+}
+h3.whymoonrabbits {
+  color: #35C7E7;
+  font-size: 13px;
+ 
+}
+h3.wearesexy{
+  color: #FF51D9;
+  font-size: 17px;
+ 
+}
+h3.wewillgive{
+  color: white;
+  font-size: 13px;
+  
+}
+.banner-txt {
+  background: url(../img/moon/box.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding-top: 11px;
+  padding-left: 36px;
+  padding-bottom: 40px;
+  padding-right: 9px;
+  margin-left: -63px;
+  margin-top: 0;
+}
+ }
+
+
+ @media(max-width:300px){
+  .star {
+ 
+    width: 261px;
+}
+img.smoke {
+
+  width: 130px;
+  
+}
+ }

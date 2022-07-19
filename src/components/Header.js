@@ -66,6 +66,8 @@ export default class Header extends Component {
                     </a>
                   </li>
                 </ul>
+
+                <img className="hamburger" src={hamburger} alt="" />
               </div>
             </div>
           </div>

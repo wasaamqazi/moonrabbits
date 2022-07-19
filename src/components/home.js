@@ -15,14 +15,17 @@ import moon from "../assets/imgs/moon.gif";
 import star from "../assets/imgs/star.gif";
 import smoke from "../assets/imgs/smoke.gif";
 import fan from "../assets/imgs/fan.png";
+import Char from "../assets/imgs/char.png";
+
 import { useEffect, useState, useRef } from "react";
 import { connectWallet, getCurrentWalletConnected } from "../utils/interact.js";
 import Web3 from "web3";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from "react-toastify";
+import hamburger from "../assets/imgs/burger.png";
+
 const { ethers } = require("ethers");
 
 const Home = (props) => {
-
   //State variables
   const [walletAddress, setWallet] = useState("");
 
@@ -36,12 +39,17 @@ const Home = (props) => {
   const tokenContract = "0x1F57F7f55F1222C80D2C80C6d623525496a90eE7";
   const nftContract = "0x8c0122f2F8f3543eF652B31151d93eba00Ae79A4";
   const stakingContract = "0xEdcc912904B5Cc372e7656eF455Cb9549a4Ddd45";
-  const tokenContractAbi = require('../abi/token.json');
-  const nftContractAbi = require('../abi/nft.json');
-  const stakingContractAbi = require('../abi/staking.json');
+  const tokenContractAbi = require("../abi/token.json");
+  const nftContractAbi = require("../abi/nft.json");
+  const stakingContractAbi = require("../abi/staking.json");
+
+  const hambureToggle = () => {
+    var element = document.getElementById("nav-wrapper");
+    element.classList.toggle("mystyle");
+  };
 
   function timeout(delay) {
-    return new Promise(res => setTimeout(res, delay));
+    return new Promise((res) => setTimeout(res, delay));
   }
 
   useEffect(async () => {
@@ -65,36 +73,40 @@ const Home = (props) => {
       const web3 = new Web3(window.ethereum);
 
       //Approve NFT
-      window.contract3 = await new web3.eth.Contract(nftContractAbi, nftContract);
+      window.contract3 = await new web3.eth.Contract(
+        nftContractAbi,
+        nftContract
+      );
       const transactionParameters = {
         to: nftContract, // Required except during contract publications.
         from: window.ethereum.selectedAddress, // must match user's active address.
-        'data': window.contract3.methods.approve(stakingContract, id).encodeABI()//make call to NFT smart contract
+        data: window.contract3.methods.approve(stakingContract, id).encodeABI(), //make call to NFT smart contract
       };
 
       //sign the transaction via Metamask
-      const txHash = await window.ethereum
-        .request({
-          method: 'eth_sendTransaction',
-          params: [transactionParameters],
-        });
+      const txHash = await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [transactionParameters],
+      });
       toast("Wait for Approval, then confirm the staking transaction");
       await timeout(5000);
 
       //Do Staking
-      window.contract4 = await new web3.eth.Contract(stakingContractAbi, stakingContract);
+      window.contract4 = await new web3.eth.Contract(
+        stakingContractAbi,
+        stakingContract
+      );
       //set up your Ethereum transaction
       const transactionParametersStaking = {
         to: stakingContract, // Required except during contract publications.
         from: window.ethereum.selectedAddress, // must match user's active address.
-        'data': window.contract4.methods.stakeNFT(id, pool).encodeABI()//make call to NFT smart contract
+        data: window.contract4.methods.stakeNFT(id, pool).encodeABI(), //make call to NFT smart contract
       };
       //sign the transaction via Metamask
-      const txHashStaking = await window.ethereum
-        .request({
-          method: 'eth_sendTransaction',
-          params: [transactionParametersStaking],
-        });
+      const txHashStaking = await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [transactionParametersStaking],
+      });
 
       await timeout(5000);
       toast("✅ Staking of NFT done successfully");
@@ -117,31 +129,34 @@ const Home = (props) => {
   const handleShow = (id) => {
     setShow(true);
     setTokenId(id);
-  }
+  };
 
   const [shows, setShows] = useState(false);
   const handleShows = () => setShows(true);
   const handleCloseS = () => setShows(false);
 
   const unstakeNFT = async (index, tokenId, pool) => {
-
     //Contract Interaction
     const web3 = new Web3(window.ethereum);
 
     //Do Staking
-    window.contract5 = await new web3.eth.Contract(stakingContractAbi, stakingContract);
+    window.contract5 = await new web3.eth.Contract(
+      stakingContractAbi,
+      stakingContract
+    );
     //set up your Ethereum transaction
     const transactionParametersUnStaking = {
       to: stakingContract, // Required except during contract publications.
       from: window.ethereum.selectedAddress, // must match user's active address.
-      'data': window.contract5.methods.unStakeNFT(index, tokenId, pool).encodeABI()//make call to NFT smart contract
+      data: window.contract5.methods
+        .unStakeNFT(index, tokenId, pool)
+        .encodeABI(), //make call to NFT smart contract
     };
     //sign the transaction via Metamask
-    const txHashUnStaking = await window.ethereum
-      .request({
-        method: 'eth_sendTransaction',
-        params: [transactionParametersUnStaking],
-      });
+    const txHashUnStaking = await window.ethereum.request({
+      method: "eth_sendTransaction",
+      params: [transactionParametersUnStaking],
+    });
 
     await timeout(5000);
     toast("✅ UnStaking of NFT done successfully");
@@ -154,31 +169,38 @@ const Home = (props) => {
     const web3 = new Web3(window.ethereum);
 
     try {
-      window.contract = await new web3.eth.Contract(nftContractAbi, nftContract);
-      const user_token_ids = await window.contract.methods.walletOfOwner(window.ethereum.selectedAddress).call();
+      window.contract = await new web3.eth.Contract(
+        nftContractAbi,
+        nftContract
+      );
+      const user_token_ids = await window.contract.methods
+        .walletOfOwner(window.ethereum.selectedAddress)
+        .call();
       var nft_data = [];
 
       for (var i = 0; i < user_token_ids.length; i++) {
-        const token_uri = await window.contract.methods.tokenURI(user_token_ids[i]).call();
+        const token_uri = await window.contract.methods
+          .tokenURI(user_token_ids[i])
+          .call();
 
         const uri = token_uri.replace("ipfs://", "https://ipfs.io/ipfs/");
         const response = await fetch(uri);
         if (!response.ok) {
-          throw new Error('Something went wrong');
+          throw new Error("Something went wrong");
         }
         const url_data = await response.json();
 
         const data = {
-          "id": user_token_ids[i],
-          "url": uri,
-          "compiler": url_data.compiler,
-          "date": url_data.date,
-          "dna": url_data.dna,
-          "description": url_data.description,
-          "edition": url_data.edition,
-          "image": url_data.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
-          "name": url_data.name
-        }
+          id: user_token_ids[i],
+          url: uri,
+          compiler: url_data.compiler,
+          date: url_data.date,
+          dna: url_data.dna,
+          description: url_data.description,
+          edition: url_data.edition,
+          image: url_data.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
+          name: url_data.name,
+        };
 
         nft_data.push(data);
       }
@@ -192,45 +214,63 @@ const Home = (props) => {
     const web3 = new Web3(window.ethereum);
 
     try {
-      window.contract1 = await new web3.eth.Contract(stakingContractAbi, stakingContract);
-      const user_staking = await window.contract1.methods.userStakingList(window.ethereum.selectedAddress).call();
+      window.contract1 = await new web3.eth.Contract(
+        stakingContractAbi,
+        stakingContract
+      );
+      const user_staking = await window.contract1.methods
+        .userStakingList(window.ethereum.selectedAddress)
+        .call();
 
       var stake_data = [];
 
       for (var i = 0; i < user_staking.length; i++) {
-        const check = await window.contract1.methods.checkIfAlreadyUnstaked(user_staking[i], window.ethereum.selectedAddress).call();
+        const check = await window.contract1.methods
+          .checkIfAlreadyUnstaked(
+            user_staking[i],
+            window.ethereum.selectedAddress
+          )
+          .call();
         if (!check) {
-          const stakes = await window.contract1.methods.stakes(user_staking[i]).call();
-          window.contract2 = await new web3.eth.Contract(nftContractAbi, nftContract);
+          const stakes = await window.contract1.methods
+            .stakes(user_staking[i])
+            .call();
+          window.contract2 = await new web3.eth.Contract(
+            nftContractAbi,
+            nftContract
+          );
           if (stakes.tokenId == "0") {
-
           } else {
-            const token_uri = await window.contract2.methods.tokenURI(stakes.tokenId).call();
+            const token_uri = await window.contract2.methods
+              .tokenURI(stakes.tokenId)
+              .call();
 
             const uri = token_uri.replace("ipfs://", "https://ipfs.io/ipfs/");
             const response = await fetch(uri);
             if (!response.ok) {
-              throw new Error('Something went wrong');
+              throw new Error("Something went wrong");
             }
             const url_data = await response.json();
 
             //Get Remaining Time of Pool
-            const end_time = (Math.floor(parseInt(stakes.timestamp)) + stakes.pool * 24 * 60 * 60);
+            const end_time =
+              Math.floor(parseInt(stakes.timestamp)) +
+              stakes.pool * 24 * 60 * 60;
 
             const data = {
-              "index": user_staking[i],
-              "url": uri,
-              "compiler": url_data.compiler,
-              "date": url_data.date,
-              "dna": url_data.dna,
-              "description": url_data.description,
-              "edition": url_data.edition,
-              "image": url_data.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
-              "name": url_data.name,
-              "token_id": stakes.tokenId,
-              "pool": stakes.pool,
-              "timestamp": end_time
-            }
+              index: user_staking[i],
+              url: uri,
+              compiler: url_data.compiler,
+              date: url_data.date,
+              dna: url_data.dna,
+              description: url_data.description,
+              edition: url_data.edition,
+              image: url_data.image.replace("ipfs://", "https://ipfs.io/ipfs/"),
+              name: url_data.name,
+              token_id: stakes.tokenId,
+              pool: stakes.pool,
+              timestamp: end_time,
+            };
             stake_data.push(data);
           }
         }
@@ -253,7 +293,9 @@ const Home = (props) => {
         }
       });
     } else {
-      toast("🦊  You must install Metamask, a virtual Ethereum wallet, in your browser.");
+      toast(
+        "🦊  You must install Metamask, a virtual Ethereum wallet, in your browser."
+      );
     }
   }
 
@@ -270,13 +312,25 @@ const Home = (props) => {
           <div id="for-close" className="forclosing">
             <div className="row">
               <div className="col-6">
-                <button id="pool1" className="stake-btn pool1" onClick={() => { setPool("7"); }}>
+                <button
+                  id="pool1"
+                  className="stake-btn pool1"
+                  onClick={() => {
+                    setPool("7");
+                  }}
+                >
                   Pool 1
                 </button>
                 <p className="days-ab">7 Days</p>
               </div>
               <div className="col-6">
-                <button id="pool2" className="stake-btn pool2" onClick={() => { setPool("15"); }}>
+                <button
+                  id="pool2"
+                  className="stake-btn pool2"
+                  onClick={() => {
+                    setPool("15");
+                  }}
+                >
                   Pool 2
                 </button>
                 <p className="days-ab">15 Days</p>
@@ -285,20 +339,35 @@ const Home = (props) => {
 
             <div className="row">
               <div className="col-6">
-                <button id="pool3" className="stake-btn pool3" onClick={() => { setPool("30"); }}>
+                <button
+                  id="pool3"
+                  className="stake-btn pool3"
+                  onClick={() => {
+                    setPool("30");
+                  }}
+                >
                   Pool 3
                 </button>
                 <p className="days-ab">30 Days</p>
               </div>
               <div className="col-6">
-                <button id="pool4" className="stake-btn pool4" onClick={() => { setPool("45"); }}>
+                <button
+                  id="pool4"
+                  className="stake-btn pool4"
+                  onClick={() => {
+                    setPool("45");
+                  }}
+                >
                   Pool 4
                 </button>
                 <p className="days-ab">45 Days</p>
               </div>
             </div>
 
-            <button className="stake-btn" onClick={() => stakeNFT(tokenId, pool)}>
+            <button
+              className="stake-btn"
+              onClick={() => stakeNFT(tokenId, pool)}
+            >
               Stake
             </button>
           </div>
@@ -329,13 +398,13 @@ const Home = (props) => {
         <img className="star" src={star} alt="" />
         <div className="container">
           <div className="row">
-            <div className="col-sm-3">
+            <div className="col-sm-3 col-3">
               <a href="/">
                 <img className="logo-img" src={logo} alt="" />
               </a>
             </div>
-            <div className="col-sm-9">
-              <div className="navigation-wrap">
+            <div className="col-sm-9 col-9">
+              <div id="nav-wrapper" className="navigation-wrap">
                 <ul className="navigationul">
                   <li className="nav-list">
                     <a className="nav-links" href="#">
@@ -354,7 +423,11 @@ const Home = (props) => {
                   </li>
                   <div className="connect-wallet-wrapper">
                     {/* <button className="connect-wallet">Connect wallet</button> */}
-                    <button id="walletButton" className="connect-wallet" onClick={connectWalletPressed}>
+                    <button
+                      id="walletButton"
+                      className="connect-wallet"
+                      onClick={connectWalletPressed}
+                    >
                       {walletAddress.length > 0 ? (
                         "Connected: " +
                         String(walletAddress).substring(0, 6) +
@@ -370,6 +443,14 @@ const Home = (props) => {
                   </div>
                 </ul>
               </div>
+              <div className="hamburger-wrap">
+                <img
+                  className="hamburger"
+                  src={hamburger}
+                  alt=""
+                  onClick={hambureToggle}
+                />
+              </div>
             </div>
             <div className="row">
               <div className="col-sm-12">
@@ -384,14 +465,19 @@ const Home = (props) => {
           <div className="thecharacter">
             <div className="container">
               <div className="row">
-                <div className="col-sm-7">
-                  <div className="smokeandchar">
-                    <img
-                      className="img-fluid character"
-                      src={character}
-                      alt=""
-                    />
-                    <img className="smoke" src={smoke} alt="" />
+                <div className="col-sm-12">
+                  <div className="smokeandchar-for-mob">
+                    <div className="smokeandchartoger">
+                      <img className="char-mob" src={Char} alt="" />
+                      <img className="smoke" src={smoke} alt="" />
+                    </div>
+                    <div className="banner-txt">
+                      <h3 className="whymoonrabbits">Why Moon Rabbits?!</h3>
+                      <h3 className="wearesexy">WE ARE SEXY.</h3>
+                      <h3 className="wewillgive">
+                        We will give you the love you never xperienced
+                      </h3>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -408,7 +494,7 @@ const Home = (props) => {
               <div className="title-wrap">
                 <h2 className="main-tit">My NFTs</h2>
               </div>
-              {nftDetails.length > 0 ?
+              {/* {nftDetails.length > 0 ?
                 nftDetails.map((item, index) => {
                   return (
                     <div className="col-xl-3">
@@ -448,40 +534,7 @@ const Home = (props) => {
                 })
                 :
                 <div></div>
-              }
-              {/* <div className="col-xl-3">
-                <div className="full-bg"></div>
-                <div className="card-main">
-                  <img src={cardgif} alt="" className="card-image" />
-                  <div className="card-gif"></div>
-                  <div className="details">
-                    <div className="details-flexx">
-                      <p className="name">Name:</p>
-                      <p className="name">Breading Pass</p>
-                    </div>
-                    <div className="details-flexx">
-                      <p className="name">Token Id :</p>
-                      <p className="name">1836</p>
-                    </div>
-                    <div className="details-flexx">
-                      <p className="name">Token Standard :</p>
-                      <p className="name">ERC-721</p>
-                    </div>
-                    <div className="details-flexx">
-                      <p className="name">Block Chian :</p>
-                      <p className="name">ETH</p>
-                    </div>
-                  </div>
-
-                  <button
-                    id="place-btn"
-                    className="stake-btn"
-                    onClick={handleShow}
-                  >
-                    Stake
-                  </button>
-                </div>
-              </div>
+              } */}
               <div className="col-xl-3">
                 <div className="full-bg"></div>
                 <div className="card-main">
@@ -547,7 +600,40 @@ const Home = (props) => {
                     Stake
                   </button>
                 </div>
-              </div> */}
+              </div>
+              <div className="col-xl-3">
+                <div className="full-bg"></div>
+                <div className="card-main">
+                  <img src={cardgif} alt="" className="card-image" />
+                  <div className="card-gif"></div>
+                  <div className="details">
+                    <div className="details-flexx">
+                      <p className="name">Name:</p>
+                      <p className="name">Breading Pass</p>
+                    </div>
+                    <div className="details-flexx">
+                      <p className="name">Token Id :</p>
+                      <p className="name">1836</p>
+                    </div>
+                    <div className="details-flexx">
+                      <p className="name">Token Standard :</p>
+                      <p className="name">ERC-721</p>
+                    </div>
+                    <div className="details-flexx">
+                      <p className="name">Block Chian :</p>
+                      <p className="name">ETH</p>
+                    </div>
+                  </div>
+
+                  <button
+                    id="place-btn"
+                    className="stake-btn"
+                    onClick={handleShow}
+                  >
+                    Stake
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -558,7 +644,7 @@ const Home = (props) => {
               <div className="title-wrap">
                 <h2 className="main-tit">My Staking</h2>
               </div>
-              {stakeDetails.length > 0 ?
+              {/* {stakeDetails.length > 0 ? (
                 stakeDetails.map((item, index) => {
                   return (
                     <div className="col-xl-3">
@@ -584,16 +670,18 @@ const Home = (props) => {
                             <p className="name">ETH</p>
                           </div>
                         </div>
-                        {(new Date()) > (new Date(parseInt(item.timestamp) * 1000))
-                          ?
+                        {new Date() >
+                        new Date(parseInt(item.timestamp) * 1000) ? (
                           <button
                             id="claim-btn"
                             className="claim-btn "
-                            onClick={() => unstakeNFT(item.index, item.token_id, item.pool)}
+                            onClick={() =>
+                              unstakeNFT(item.index, item.token_id, item.pool)
+                            }
                           >
                             Claim
                           </button>
-                          :
+                        ) : (
                           <div className="countdown-wrapper">
                             <Countdown
                               onComplete={() => window.location.reload(false)}
@@ -606,46 +694,14 @@ const Home = (props) => {
                               <p className="dayss">Sec</p>
                             </div>
                           </div>
-                        }
+                        )}
                       </div>
                     </div>
-                  )
-                }) :
-                <div></div>}
-              {/* <div className="col-xl-3">
-                <div className="full-bg"></div>
-                <div className="card-main staking">
-                  <img src={cardgif} alt="" className="card-image" />
-                  <div className="card-gif"></div>
-                  <div className="details">
-                    <div className="details-flexx">
-                      <p className="name">Name:</p>
-                      <p className="name">Breading Pass</p>
-                    </div>
-                    <div className="details-flexx">
-                      <p className="name">Token Id :</p>
-                      <p className="name">1836</p>
-                    </div>
-                    <div className="details-flexx">
-                      <p className="name">Token Standard :</p>
-                      <p className="name">ERC-721</p>
-                    </div>
-                    <div className="details-flexx">
-                      <p className="name">Block Chian :</p>
-                      <p className="name">ETH</p>
-                    </div>
-                  </div>
-
-                  <button
-                    id="claim-btn"
-                    className="claim-btn "
-                    onClick={handleShows}
-                  >
-                    Claim
-                  </button>
-                </div>
-              </div>
-
+                  );
+                })
+              ) : (
+                <div></div>
+              )} */}
               <div className="col-xl-3">
                 <div className="full-bg"></div>
                 <div className="card-main staking">
@@ -712,9 +768,43 @@ const Home = (props) => {
                     Claim
                   </button>
                 </div>
-              </div> */}
+              </div>
+
+              <div className="col-xl-3">
+                <div className="full-bg"></div>
+                <div className="card-main staking">
+                  <img src={cardgif} alt="" className="card-image" />
+                  <div className="card-gif"></div>
+                  <div className="details">
+                    <div className="details-flexx">
+                      <p className="name">Name:</p>
+                      <p className="name">Breading Pass</p>
+                    </div>
+                    <div className="details-flexx">
+                      <p className="name">Token Id :</p>
+                      <p className="name">1836</p>
+                    </div>
+                    <div className="details-flexx">
+                      <p className="name">Token Standard :</p>
+                      <p className="name">ERC-721</p>
+                    </div>
+                    <div className="details-flexx">
+                      <p className="name">Block Chian :</p>
+                      <p className="name">ETH</p>
+                    </div>
+                  </div>
+
+                  <button
+                    id="claim-btn"
+                    className="claim-btn "
+                    onClick={handleShows}
+                  >
+                    Claim
+                  </button>
+                </div>
+              </div>
             </div>
-            {/* 
+
             <div style={{ paddingTop: "30px" }} className="row">
               <div className="col-xl-3">
                 <div className="full-bg"></div>
@@ -749,7 +839,7 @@ const Home = (props) => {
                   </button>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
 
           <div className="footer">
