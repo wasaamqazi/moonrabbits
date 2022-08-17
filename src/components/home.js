@@ -494,7 +494,7 @@ const Home = (props) => {
               <div className="title-wrap">
                 <h2 className="main-tit">My NFTs</h2>
               </div>
-              {/* {nftDetails.length > 0 ?
+              {nftDetails.length > 0 ?
                 nftDetails.map((item, index) => {
                   return (
                     <div className="col-xl-3">
@@ -534,8 +534,8 @@ const Home = (props) => {
                 })
                 :
                 <div></div>
-              } */}
-              <div className="col-xl-3">
+              }
+              {/* <div className="col-xl-3">
                 <div className="full-bg"></div>
                 <div className="card-main">
                   <img src={cardgif} alt="" className="card-image" />
@@ -633,7 +633,7 @@ const Home = (props) => {
                     Stake
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -644,7 +644,7 @@ const Home = (props) => {
               <div className="title-wrap">
                 <h2 className="main-tit">My Staking</h2>
               </div>
-              {/* {stakeDetails.length > 0 ? (
+              {stakeDetails.length > 0 ? (
                 stakeDetails.map((item, index) => {
                   return (
                     <div className="col-xl-3">
@@ -671,7 +671,7 @@ const Home = (props) => {
                           </div>
                         </div>
                         {new Date() >
-                        new Date(parseInt(item.timestamp) * 1000) ? (
+                          new Date(parseInt(item.timestamp) * 1000) ? (
                           <button
                             id="claim-btn"
                             className="claim-btn "
@@ -701,8 +701,8 @@ const Home = (props) => {
                 })
               ) : (
                 <div></div>
-              )} */}
-              <div className="col-xl-3">
+              )}
+              {/* <div className="col-xl-3">
                 <div className="full-bg"></div>
                 <div className="card-main staking">
                   <img src={cardgif} alt="" className="card-image" />
@@ -839,9 +839,9 @@ const Home = (props) => {
                   </button>
                 </div>
               </div>
+            </div> */}
             </div>
           </div>
-
           <div className="footer">
             <div className="container">
               <div className="row">
